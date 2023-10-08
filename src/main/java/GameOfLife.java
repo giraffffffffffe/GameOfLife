@@ -23,20 +23,20 @@
 //imports all the things that are needed
 package main.java;
 import java.util.Scanner; //used for the keyboard
-import java.io.IOException; //used in most try statments (not all)
+import java.io.IOException; //used in most try statements (not all)
 
-//the following are for the use of files specifcally
+//the following are for the use of files specifically
 import java.io.File;
 import java.io.FileWriter;
 
 public class GameOfLife {
-    public final int MAX_SIZE = 50; //this will be the maximum width and height of the grid. Otherwise it is too big for the user to see
-    public final int MIN_SIZE = 10; //this will be the minimum width and height of the grid. Otherwise it is too small to be used
+    public final int MAX_SIZE = 50; //this will be the maximum width and height of the grid. Otherwise, it is too big for the user to see
+    public final int MIN_SIZE = 10; //this will be the minimum width and height of the grid. Otherwise, it is too small to be used
     public int gridSize; // variable will be determined by what the user inputs or the by the first line of a .gol file
     public boolean[][] grid = new boolean[MAX_SIZE][MAX_SIZE]; //this array is the same size as the grid and will hold the information to whether the cell is alive or dead.
     public boolean[][] changeGrid = new boolean[MAX_SIZE][MAX_SIZE]; //this array is what is used to record whether the cell is changing each turn.
-    public final char ON = '■'; //character used when a cell is 'alive' (The words 'alive' and 'on' are used interchagably in reference to cells)
-    public final char OFF = '□'; //character used when a cell is 'dead' (The words 'dead' and 'off' are used interchagably in reference to cells)
+    public final char ON = '■'; //character used when a cell is 'alive' (The words 'alive' and 'on' are used interchangeably in reference to cells)
+    public final char OFF = '□'; //character used when a cell is 'dead' (The words 'dead' and 'off' are used interchangeably in reference to cells)
     public final int MAX_TURNS = 50; //max amount of turns the player can advance at any one time
     public final float DEFAULT_SECONDS_BETWEEN_TURNS = 0.5f; //this is the default amount of time between turns
     public float secondsBetweenTurns = DEFAULT_SECONDS_BETWEEN_TURNS; //this is the amount of time between turns. This is adjustable
@@ -64,12 +64,12 @@ public class GameOfLife {
         try {
             gridSize = Integer.parseInt(input); // if the user inputted a number, this sets the gridSize to be that number
             if (gridSize > MAX_SIZE) { // this ensures that the grid stays a manageable size even if the user inputs a large number
-                System.out.println("That's larger than the maximum. Setting gridsize to the maximum...");
+                System.out.println("That's larger than the maximum. Setting grid size to the maximum...");
                 gridSize = MAX_SIZE;
             }
 
             if (gridSize < MIN_SIZE){ // this ensures that the grid is usable
-                System.out.println("That's smaller than the minimum. Setting gridsize to the minimum...");
+                System.out.println("That's smaller than the minimum. Setting grid size to the minimum...");
                 gridSize = MIN_SIZE;
             }
 
@@ -83,7 +83,7 @@ public class GameOfLife {
 
         } catch(NumberFormatException notInt){ //if the input is not a number, this catch runs
             if (input.equals("i")){
-                info(true); // if the user inputted 'i', an infomation page is shown
+                info(true); // if the user inputted 'i', an information page is shown
             } else if (input.equals("l")){ // if the user inputted 'l', this runs
                 System.out.println("Please enter the name of the file you would like to load");
                 String fileName = kb.nextLine();
@@ -95,8 +95,8 @@ public class GameOfLife {
         }
     }
     public void info(boolean start) { // if start is true, then welcome() is run afterwards, if false, gridDraw(true)
-        // the infomation
-        System.out.println("This is a simulator based off a set of rules designed by John Conway. \nIt is designed to simulate a colony and can be used to make recurring patterns, interesting shapes and is made to just generally have fun with.\nThe rules are as follows:\nAny live cell with fewer than two live neighbours dies, as if by underpopulation. \nAny live cell with two or three live neighbours lives on to the next generation. \nAny live cell with more than three live neighbours dies, as if by overpopulation. \nAny dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.\n\n.gol files can be run in this program. \nThis is an example of the layout of a .gol file: \n4 \n0110 \n0000 \n0100 \n1001 \n\nThe first number is the gridsize and the rest of the numbers represent the cells. '0' means the cell is dead and '1' means the cell is alive. \nIn this program, 'b.gol' or 'B.gol' will not work for filenames. \nThe .gol file must be in the same folder as the java files \n\nJust follow the prompts and have fun!");
+        // the information
+        System.out.println("This is a simulator based off a set of rules designed by John Conway. \nIt is designed to simulate a colony and can be used to make recurring patterns, interesting shapes and is made to just generally have fun with.\nThe rules are as follows:\nAny live cell with fewer than two live neighbours dies, as if by underpopulation. \nAny live cell with two or three live neighbours lives on to the next generation. \nAny live cell with more than three live neighbours dies, as if by overpopulation. \nAny dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.\n\n.gol files can be run in this program. \nThis is an example of the layout of a .gol file: \n4 \n0110 \n0000 \n0100 \n1001 \n\nThe first number is the grid size and the rest of the numbers represent the cells. '0' means the cell is dead and '1' means the cell is alive. \nIn this program, 'b.gol' or 'B.gol' will not work for filenames. \nThe .gol file must be in the same folder as the java files \n\nJust follow the prompts and have fun!");
         if (start) { // if the player came from the GameOfLife() method, that means the player hasn't started the game yet.
             System.out.println("\nTo start the game, enter how large you want the grid to be. This number has to be less than " + MAX_SIZE + " and more than " + MIN_SIZE + ". 35 is recommended if you are unsure.\nTo load a save file, enter 'l'");
             welcome(); //runs the welcome method
@@ -159,6 +159,7 @@ public class GameOfLife {
                         break;
                     case "q":
                         System.out.println("Quitting..."); // if the user's input was 'q' or 'Q',there is nothing else for the game to do so it stops the program
+
                         break;
                     case "l":
                         System.out.println("Enter 'b' to go back to the menu or the name of the file you would like to open.");
@@ -189,7 +190,7 @@ public class GameOfLife {
         }
 
         public void changeCells() { // this method lets the user manually change cells
-            if (firstCellChange){ // this is the first time the user changes a cell (resets after each time the user finishs changing cells)
+            if (firstCellChange){ // this is the first time the user changes a cell (resets after each time the user finishes changing cells)
                 System.out.println("Please enter the x-coordinate of the cell you would like to change.");
             }else {
                 System.out.println("Enter 's' to stop changing cells or enter the x-coordinate of the cell you would like to change.");
@@ -237,6 +238,7 @@ public class GameOfLife {
             } catch(NumberFormatException notInt){ // if the user didn't enter a number
                 if(input.equalsIgnoreCase("d")){ // it checks to see if 'd' or 'D' was entered and if so, resets the time between turns
                     secondsBetweenTurns = DEFAULT_SECONDS_BETWEEN_TURNS;
+                    System.out.println("The time between turns is "+secondsBetweenTurns+"s.");
                     turn(); // goes to the turn() method and continues the game
                 } else { // if something else was entered, the changeTurnRest method re-runs
                     System.out.println("Invalid input");
@@ -255,10 +257,12 @@ public class GameOfLife {
                 }
             } else if(time< DANGER_REFRESH_TIME){ // if the refresh time is smaller than this, it can trigger seizures or other physical reactions in photosensitive users
                 System.out.println("Are you sure you would like to continue? "+time+" is smaller than "+DANGER_REFRESH_TIME+"s? (y/n)");
-                input = kb.nextLine().toLowerCase(); // ensures that the users' input is in lower case
-                if(input.equals("y")){
+                String i = kb.nextLine();
+                if(i.equalsIgnoreCase("y")){
                     secondsBetweenTurns = time; //the number the user entered is now the seconds between turns
-                } else if(input.equals("n")){
+                    System.out.println("The time between turns is "+secondsBetweenTurns+"s.");
+                    turn();
+                } else if(i.equalsIgnoreCase("n")){
                     changeTurnRest();
                 } else { // if the user enters anything else, they are redirected to the beginning of this method with an error message
                     System.out.println("Invalid input");
@@ -284,68 +288,69 @@ public class GameOfLife {
             //if the user wants to adjust the time between turns
             if (input.equals("t")){
                 changeTurnRest();
-            }
+            } else { // this is so that I can quit. Otherwise, it prints out an error if you try to quit after changing the turn speed
 
-            int numberOfTurns = 0; // initialises variable
-            try {
-                numberOfTurns = Integer.parseInt(input); // tries to turn the string in to an integer
-            }catch(NumberFormatException notInt){ // if the user didn't enter a number the turn method re-runs
-                System.out.println("Invalid input");
-                turn();
-            }
-            if (numberOfTurns == 0){ //if the user inputs '0', the grid redraws with no change.
-                System.out.println("No turns advanced.");
-                gridDraw(true);
-            }
-            // if the number of turns will take too long to advance
-            if (numberOfTurns > MAX_TURNS){
-                System.out.println("This is more than "+ MAX_TURNS +" turns. Press 'a' to advance "+ MAX_TURNS +" turns. Press any key to re-enter the amount of turns you would like to advance");
-                input = kb.nextLine().toLowerCase();
-                if (input.equals("a")){
-                    numberOfTurns = MAX_TURNS;
-                }else{
-                    turn(); // if anythig that wasn't 'a' or 'A' was entered, the turn method re-runs
+                int numberOfTurns = 0; // initialises variable
+                try {
+                    numberOfTurns = Integer.parseInt(input); // tries to turn the string in to an integer
+                } catch (NumberFormatException notInt) { // if the user didn't enter a number the turn method re-runs
+                    System.out.println("Invalid input");
+                    turn();
                 }
-            }
-
-            // in this section, i have used 'cellA' to indecate a cell that is adjacent to the cell in question 'cellQ'
-            for(int t = 0;  t < numberOfTurns; t++) { // this for loop runs for the amount of turns the users wants
-                // these two for loops ensure that each cell is checked
-                for (int i = 0; i < gridSize; i++) {
-                    for (int j = 0; j < gridSize; j++) {
-                        int alive = 0; // sets the amount of alive cellA surrounding cellQ to 0
-                        // these two for loops check each cellA
-                        for (int countI = -1; countI < 2; countI++) {
-                            for (int countJ = -1; countJ < 2; countJ++) {
-                                if (countI == 0 && countJ == 0) { //this is so cellQ isn't counted
-                                    // System.out.println("Cell at coordinate ("+j+","+i+") checked");
-
-                                    // runs for each cellA
-                                    // if cellA is on the grid (not off the edges) and is alive, the count of how many cellA that surrond cellQ are alive increases by 1
-                                } else if (((j + countJ) > 0 && (j + countJ) < gridSize) && ((i + countI) > 0 && (i + countI) < gridSize) && (grid[i + countI][j + countJ])) {
-                                    alive++;
-                                }
-                            }
-                        }
-
-                        // if cellQ is alive and less than 2 or more than three cellA are alive, cellQ changes state
-                        if (grid[i][j] && (alive < 2 || alive > 3)) {
-                            changeGrid[i][j] = true;
-                            // if cellQ i dead and there are exactly 3 alive cellA, cellQ changes state
-                        } else if ((!grid[i][j]) && (alive == 3)) {
-                            changeGrid[i][j] = true;
-                        }
+                if (numberOfTurns == 0) { //if the user inputs '0', the grid redraws with no change.
+                    System.out.println("No turns advanced.");
+                    gridDraw(true);
+                }
+                // if the number of turns will take too long to advance
+                if (numberOfTurns > MAX_TURNS) {
+                    System.out.println("This is more than " + MAX_TURNS + " turns. Press 'a' to advance " + MAX_TURNS + " turns. Press any key to re-enter the amount of turns you would like to advance");
+                    input = kb.nextLine().toLowerCase();
+                    if (input.equals("a")) {
+                        numberOfTurns = MAX_TURNS;
+                    } else {
+                        turn(); // if anything that wasn't 'a' or 'A' was entered, the turn method re-runs
                     }
                 }
 
-                //if it is not the last turn, it draws the grid and then comes back and runs the for loop in line 310 again. Otherwise, it runs the gridDraw method and then continues
-                gridDraw(t >= (numberOfTurns - 1));
+                // in this section, I have used 'cellA' to indicate a cell that is adjacent to the cell in question 'cellQ'
+                for (int t = 0; t < numberOfTurns; t++) { // this for loop runs for the amount of turns the users wants
+                    // these two for loops ensure that each cell is checked
+                    for (int i = 0; i < gridSize; i++) {
+                        for (int j = 0; j < gridSize; j++) {
+                            int alive = 0; // sets the amount of alive cellA surrounding cellQ to 0
+                            // these two for loops check each cellA
+                            for (int countI = -1; countI < 2; countI++) {
+                                for (int countJ = -1; countJ < 2; countJ++) {
+                                    if (countI == 0 && countJ == 0) { //this is so cellQ isn't counted
+                                        // System.out.println("Cell at coordinate ("+j+","+i+") checked");
 
-                //this leaves a small amount of time (defined in secondsBetweenTurns) between each turn
-                try {
-                    Thread.sleep((long) (secondsBetweenTurns * 1000));
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
+                                        // runs for each cellA
+                                        // if cellA is on the grid (not off the edges) and is alive, the count of how many cellA that surround cellQ are alive increases by 1
+                                    } else if (((j + countJ) > 0 && (j + countJ) < gridSize) && ((i + countI) > 0 && (i + countI) < gridSize) && (grid[i + countI][j + countJ])) {
+                                        alive++;
+                                    }
+                                }
+                            }
+
+                            // if cellQ is alive and less than 2 or more than three cellA are alive, cellQ changes state
+                            if (grid[i][j] && (alive < 2 || alive > 3)) {
+                                changeGrid[i][j] = true;
+                                // if cellQ i dead and there are exactly 3 alive cellA, cellQ changes state
+                            } else if ((!grid[i][j]) && (alive == 3)) {
+                                changeGrid[i][j] = true;
+                            }
+                        }
+                    }
+
+                    //if it is not the last turn, it draws the grid and then comes back and runs the for loop in line 310 again. Otherwise, it runs the gridDraw method and then continues
+                    gridDraw(t >= (numberOfTurns - 1));
+
+                    //this leaves a small amount of time (defined in secondsBetweenTurns) between each turn
+                    try {
+                        Thread.sleep((long) (secondsBetweenTurns * 1000));
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                    }
                 }
             }
         }
@@ -405,7 +410,7 @@ public class GameOfLife {
                 loadFile(fileName);
             } else {
                 try{
-                    gridSize = Integer.parseInt(input); // tries to turn a string into a int
+                    gridSize = Integer.parseInt(input); // tries to turn a string into an int
                     if (gridSize > MAX_SIZE) { //this ensures that the grid stays a manageable size even if the user inputs a large number
                         gridSize = MAX_SIZE;
                     }
