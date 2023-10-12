@@ -407,7 +407,6 @@ public class GameOfLife {
                 gridDraw(true);
             } else {
                 loadFile(fileName);
-                e.printStackTrace();
             }
         }
 
