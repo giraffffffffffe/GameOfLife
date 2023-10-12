@@ -239,7 +239,6 @@ public class GameOfLife {
     public void changeTurnRest(){
         System.out.println("Enter 'd' for default time ("+DEFAULT_SECONDS_BETWEEN_TURNS+"s) or enter the amount of seconds you would like between the turns. This must be less than "+MAX_TURN_REST+"s. \nWARNING: Anything less than "+DANGER_REFRESH_TIME+"s could effect photosensitive users.");
         String input = kb.nextLine();
-        boolean timeSet = false;
         float time = DEFAULT_SECONDS_BETWEEN_TURNS; //initialises time variable to default in case something goes wrong
         try {
             time = Float.parseFloat(input); // tries to change the string into a float
@@ -365,7 +364,6 @@ public class GameOfLife {
 
     // this runs when the user wants to load a file
     public void loadFile(String fileName){
-        boolean errorThrown = false; // this is used so the user can quit
         if(fileName.equalsIgnoreCase("b")){ // this means that the user wants to go back to the menu
             gridDraw(true);
         }
@@ -392,21 +390,19 @@ public class GameOfLife {
                 }
             }catch(StringIndexOutOfBoundsException e){ // if a line ends early and there's no char or if there isn't enough lines
                 fileNotCompatiableError(fileName);
-                errorThrown = true;
+
             }
 
             readFile.close(); // closes file reader
             gridDraw(true);
         }catch(IOException e){ // if the file 'fileName.gol' could not be found, this catch runs
-            if (!errorThrown) { // this is so the user can quit
-                System.out.println("That file could not be found. \nTo go back, enter 'b' or enter the name of the file you would like to open.");
-                fileName = kb.nextLine();
-                if (fileName.equalsIgnoreCase("b")) {
-                    gridDraw(true);
-                } else {
-                    loadFile(fileName);
-                    e.printStackTrace();
-                }
+            System.out.println("That file could not be found. \nTo go back, enter 'b' or enter the name of the file you would like to open.");
+            fileName = kb.nextLine();
+            if (fileName.equalsIgnoreCase("b")) {
+                gridDraw(true);
+            } else {
+                loadFile(fileName);
+                e.printStackTrace();
             }
         }
 
