@@ -35,8 +35,8 @@ public class GameOfLife {
     public int gridSize; // variable will be determined by what the user inputs or the by the first line of a .gol file
     public boolean[][] grid = new boolean[MAX_SIZE][MAX_SIZE]; //this array is the same size as the grid and will hold the information to whether the cell is alive or dead.
     public boolean[][] changeGrid = new boolean[MAX_SIZE][MAX_SIZE]; //this array is what is used to record whether the cell is changing each turn.
-    public final char ON = 'n'; //character used when a cell is 'alive' (The words 'alive' and 'on' are used interchangeably in reference to cells)
-    public final char OFF = 'f'; //character used when a cell is 'dead' (The words 'dead' and 'off' are used interchangeably in reference to cells)
+    public final char ON = 'O'; //character used when a cell is 'alive' (The words 'alive' and 'on' are used interchangeably in reference to cells)
+    public final char OFF = '•'; //character used when a cell is 'dead' (The words 'dead' and 'off' are used interchangeably in reference to cells)
     public final int MAX_TURNS = 50; //max amount of turns the player can advance at any one time
     public final float DEFAULT_SECONDS_BETWEEN_TURNS = 1.5f; //this is the default amount of time between turns
     public float secondsBetweenTurns = DEFAULT_SECONDS_BETWEEN_TURNS; //this is the amount of time between turns. This is adjustable
@@ -113,7 +113,7 @@ public class GameOfLife {
         // this draws the grid
 
         //this prints the first line of numbers (the x-axis)
-        System.out.print("  "); // this space needs to be at the beginning to get the numbers to line up right
+        System.out.print("   "); // this space needs to be at the beginning to get the numbers to line up right
         for(int i = 1; i < (gridSize+1); i++) { // this section of code prints out a row of numbers for the user to refer to. The '1' and '+1' is because gridSize starts at 0 whereas my coordinates don't
             if (i <= 9) {
                 System.out.print(i + "  "); // the numbers with 1 digit need 2 spaces to make them line up right.
@@ -333,7 +333,7 @@ public class GameOfLife {
 
                                     // runs for each cellA
                                     // if cellA is on the grid (not off the edges) and is alive, the count of how many cellA that surround cellQ are alive increases by 1
-                                } else if (((j + countJ) > 0 && (j + countJ) < gridSize) && ((i + countI) > 0 && (i + countI) < gridSize) && (grid[i + countI][j + countJ])) {
+                                } else if (((j + countJ) > -1 && (j + countJ) < gridSize) && ((i + countI) > -1 && (i + countI) < gridSize) && (grid[i + countI][j + countJ])) {
                                     alive++;
                                 }
                             }
