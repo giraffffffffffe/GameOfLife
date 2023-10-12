@@ -377,16 +377,21 @@ public class GameOfLife {
             }
             try {
                 for (int i = 0; i < gridSize; i++) { //makes the right amount of rows
-                    String line = readFile.nextLine();
-                    for (int j = 0; j < gridSize; j++) { //makes the right amount of columns
-                        if (line.charAt(j) == '0') { // if the character is a '0', the cell is dead
-                            grid[i][j] = false; // assigns that cell as 'off'.
-                        } else if (line.charAt(j) == '1') { // if the character is a '1', the cell is alive
-                            grid[i][j] = true; // assigns that cell as 'off'.
-                        } else { // if there are any other characters (not '1' or '0')
-                            fileNotCompatiableError(fileName);
+                    if (readFile.hasNextLine()) {
+                        String line = readFile.nextLine();
+                        for (int j = 0; j < gridSize; j++) { //makes the right amount of columns
+                            if (line.charAt(j) == '0') { // if the character is a '0', the cell is dead
+                                grid[i][j] = false; // assigns that cell as 'off'.
+                            } else if (line.charAt(j) == '1') { // if the character is a '1', the cell is alive
+                                grid[i][j] = true; // assigns that cell as 'off'.
+                            } else { // if there are any other characters (not '1' or '0')
+                                fileNotCompatiableError(fileName);
+                            }
                         }
+                    } else {
+                        fileNotCompatiableError(fileName);
                     }
+
                 }
             }catch(StringIndexOutOfBoundsException e){ // if a line ends early and there's no char or if there isn't enough lines
                 fileNotCompatiableError(fileName);
