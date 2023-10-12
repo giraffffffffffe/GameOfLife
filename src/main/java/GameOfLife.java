@@ -1,6 +1,6 @@
 /**
  * @author Anne Carey-Smith
- * @version 9-October-2023
+ * @version 13-October-2023
  *
  * This is a simulation based off Conway's Game of Life. This game cannot be won and there is no aim.
  * This version of Conway's Game of Life is not played in an infinite world. The simulation happens on a grid.
@@ -349,7 +349,7 @@ public class GameOfLife {
                     }
                 }
 
-                //if it is not the last turn, it draws the grid and then comes back and runs the for loop in line 310 again. Otherwise, it runs the gridDraw method and then continues
+                //if it is not the last turn, it draws the grid and then comes back and runs the for loop in line 323 again. Otherwise, it runs the gridDraw method and then continues
                 gridDraw(t >= (numberOfTurns - 1));
 
                 //this leaves a small amount of time (defined in secondsBetweenTurns) between each turn
@@ -372,7 +372,7 @@ public class GameOfLife {
             Scanner readFile = new Scanner(fileAsked);
             gridSize = Integer.parseInt(readFile.nextLine()); // the first line in a .gol file is the grid size
             if (gridSize > MAX_SIZE || gridSize < MIN_SIZE){
-                System.out.println("This file is not compatible with this program due to an incompatible grid size \nThe maximum grid size for this program is "+MAX_SIZE+"\nThe minimum grid size is "+MIN_SIZE);
+                System.out.println("That file is not compatible with this program due to an incompatible grid size \nThe maximum grid size for this program is "+MAX_SIZE+"\nThe minimum grid size is "+MIN_SIZE);
                 gridDraw(true);
             }
             try {
@@ -417,7 +417,7 @@ public class GameOfLife {
 
     // this is a separate method because I have to use it twice. I can't just go back to gridDraw() because the grid array might be only half written over which would cause errors
     public void fileNotCompatiableError(String fileName, boolean fromWelcome){
-        System.out.println("This file is not compatible with this program.\nEnter 'l' to load a different file or enter how wide you would like the grid to be.");
+        System.out.println("That file is not compatible with this program.\nEnter 'l' to load a different file or enter how wide you would like the grid to be.");
         String input = kb.nextLine().toLowerCase();
         if (input.equals("l")){
             System.out.println("Please enter the name of the file you would like to load");
@@ -427,9 +427,11 @@ public class GameOfLife {
             try{
                 gridSize = Integer.parseInt(input); // tries to turn a string into an int
                 if (gridSize > MAX_SIZE) { //this ensures that the grid stays a manageable size even if the user inputs a large number
+                    System.out.println("That's larger than the maximum grid size. Setting grid to maximum size…");
                     gridSize = MAX_SIZE;
                 }
                 if (gridSize < MIN_SIZE){ //this ensures that the grid stays a manageable size even if the user inputs a small number
+                    System.out.println("That's smaller than the minimum grid size. Setting grid to minimum size…");
                     gridSize = MIN_SIZE;
                 }
                 for (int i = 0; i < gridSize; i++) { //makes the right amount of rows
