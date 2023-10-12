@@ -224,7 +224,7 @@ public class GameOfLife {
             i = Integer.parseInt(input); // tries to turn the input into an integer
         } catch (
                 NumberFormatException notInt) { // if the user didn't enter a number, an error is printed out and the change cells method is run again
-            System.out.println("Invalid input rr");
+            System.out.println("Invalid input");
             changeCells();
         }
         if (i > gridSize || i == 0) { // if the x co-ordinate is not a number within the boundaries of the grid, an error is printed and the change cells method is run again
@@ -248,7 +248,7 @@ public class GameOfLife {
                 System.out.println("The time between turns is "+secondsBetweenTurns+"s.");
                 turn(); // goes to the turn() method and continues the game
             } else { // if something else was entered, the changeTurnRest method re-runs
-                System.out.println("Invalid input ww");
+                System.out.println("Invalid input");
                 changeTurnRest();
             }
         }
