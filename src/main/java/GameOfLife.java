@@ -87,7 +87,7 @@ public class GameOfLife {
             } else if (input.equals("l")){ // if the user inputted 'l', this runs
                 System.out.println("Please enter the name of the file you would like to load");
                 String fileName = kb.nextLine();
-                loadFile(fileName);
+                loadFile(fileName,true);
             } else {
                 System.out.println("That is not a valid input. \nTo see instructions, press 'i'. \nTo start the game, enter how large you want the grid to be (less than "+MAX_SIZE+" and more than "+MIN_SIZE+") or enter 'l' to load a save file.");
                 welcome();
@@ -164,7 +164,7 @@ public class GameOfLife {
                 case "l":
                     System.out.println("Enter 'b' to go back to the menu or the name of the file you would like to open.");
                     String fileName = kb.nextLine();
-                    loadFile(fileName);
+                    loadFile(fileName, false); // if the file does not load, the user is re-directed back to gridDraw() not welcome()
                     break;
                 case "s":
                     saveFile();
@@ -363,7 +363,7 @@ public class GameOfLife {
     }
 
     // this runs when the user wants to load a file
-    public void loadFile(String fileName){
+    public void loadFile(String fileName, boolean fromWelcome){
         if(fileName.equalsIgnoreCase("b")){ // this means that the user wants to go back to the menu
             gridDraw(true);
         }
@@ -385,16 +385,16 @@ public class GameOfLife {
                             } else if (line.charAt(j) == '1') { // if the character is a '1', the cell is alive
                                 grid[i][j] = true; // assigns that cell as 'off'.
                             } else { // if there are any other characters (not '1' or '0')
-                                fileNotCompatiableError(fileName);
+                                fileNotCompatiableError(fileName, fromWelcome);
                             }
                         }
                     } else {
-                        fileNotCompatiableError(fileName);
+                        fileNotCompatiableError(fileName, fromWelcome);
                     }
 
                 }
             }catch(StringIndexOutOfBoundsException e){ // if a line ends early and there's no char or if there isn't enough lines
-                fileNotCompatiableError(fileName);
+                fileNotCompatiableError(fileName, fromWelcome);
 
             }
 
@@ -404,22 +404,25 @@ public class GameOfLife {
             System.out.println("That file could not be found. \nTo go back, enter 'b' or enter the name of the file you would like to open.");
             fileName = kb.nextLine();
             if (fileName.equalsIgnoreCase("b")) {
+                if (fromWelcome){
+                    System.out.println("Welcome to Conway's game of life. To see instructions, press 'i'. \nTo start the game, enter how large you want the grid to be (less than "+MAX_SIZE+" and more than "+MIN_SIZE+") or enter 'l' to load a save file");
+                    welcome();
+                }
                 gridDraw(true);
             } else {
-                loadFile(fileName);
+                loadFile(fileName, fromWelcome);
             }
         }
-
     }
 
     // this is a separate method because I have to use it twice. I can't just go back to gridDraw() because the grid array might be only half written over which would cause errors
-    public void fileNotCompatiableError(String fileName){
+    public void fileNotCompatiableError(String fileName, boolean fromWelcome){
         System.out.println("This file is not compatible with this program.\nEnter 'l' to load a different file or enter how wide you would like the grid to be.");
         String input = kb.nextLine().toLowerCase();
         if (input.equals("l")){
             System.out.println("Please enter the name of the file you would like to load");
             fileName = kb.nextLine();
-            loadFile(fileName);
+            loadFile(fileName, fromWelcome);
         } else {
             try{
                 gridSize = Integer.parseInt(input); // tries to turn a string into an int
@@ -436,7 +439,7 @@ public class GameOfLife {
                 }
             } catch (NumberFormatException notInt){
                 System.out.println("Invalid input");
-                loadFile(fileName);
+                loadFile(fileName, fromWelcome);
             }
         }
     }
